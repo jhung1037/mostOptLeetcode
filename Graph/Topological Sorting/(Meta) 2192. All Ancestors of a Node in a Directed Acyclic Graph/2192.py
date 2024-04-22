@@ -22,6 +22,4 @@ class Solution:
                 if indegree[child] == 0:
                     check.append(child)
 
-        for i in range(n):
-            res[i] = sorted(list(res[i]))
-        return res
+        return list(map(sorted, res))
