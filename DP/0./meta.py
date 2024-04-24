@@ -23,9 +23,12 @@ for n in lis:
             dd = d[-1]*10+n
             if dd<=26:
                 new.append(d[:-1]+[dd])
-    if n:
-        for d in dp:
-            d.append(n)
+    if n == 0:
+        dp = new
+        continue
+    
+    for d in dp:
+        d.append(n)
     dp += new
 
 for d in dp:
