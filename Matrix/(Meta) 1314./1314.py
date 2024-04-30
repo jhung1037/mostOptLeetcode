@@ -2,17 +2,15 @@ class Solution:
     def matrixBlockSum(self, mat: List[List[int]], k: int) -> List[List[int]]:
         row = len(mat)
         col = len(mat[0])
-        
-        def get_grid(r, c):
-            il = r-k if r-k > 0 else 0
-            ir = r+k+1 if r+k+1 < row else row
-            jl = c-k if c-k > 0 else 0
-            jr = c+k+1 if c+k+1 < col else col
-            return sum(mat[i][j] for j in range(jl,jr) for i in range(il,ir))
 
-        res = [[0] * col for _ in range(row)]
+        presum = [[0] * (col+1) for _ in range(row+1)]
+        for i in range(1,row+1):
+            for j in range(1 ,col+1):
+                presum[i][j] = mat[i-1][j-1] + presum[i-1][j] + presum[i][j-1] - presum[i-1][j-1]
         for i in range(row):
             for j in range(col):
-                res[i][j] = get_grid(i, j)
+                ru, rd = max(0, i-k), min(row,i+1+k)
+                cl, cr = max(0, j-k), min(col,j+1+k)
+                mat[i][j] = presum[rd][cr] - presum[rd][cl] - presum[ru][cr] + presum[ru][cl]
 
-        return res
+        return mat
