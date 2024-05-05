@@ -2,10 +2,13 @@ class Solution:
     def kWeakestRows(self, mat: List[List[int]], k: int) -> List[int]:
         heap = []
         for i, row in enumerate(mat):
-            heapq.heappush(heap, (sum(row),i))
-            
+            count = 0
+            for col in row:
+                if not col: break
+                count += 1
+            heapq.heappush(heap,(count, i))
+
         ans = []
         for j in range(k):
-            _, i = heapq.heappop(heap)
-            ans.append(i)
+            ans.append(heapq.heappop(heap)[1])
         return ans
