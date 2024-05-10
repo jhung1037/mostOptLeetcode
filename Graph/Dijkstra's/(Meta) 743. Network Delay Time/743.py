@@ -1,26 +1,18 @@
 class Solution:
     def networkDelayTime(self, times: List[List[int]], n: int, k: int) -> int:
+        adj = [[] for _ in range(n+1)]
+        for u, v, t in times:
+            adj[u].append((t, v))
 
-        adj = {i : [] for i in range(n+1)}
-        for time in times:
-            u, v, t = time
-            adj[u].append([t,v])
-
-        heap = []
+        heap = [(0, k)]
         visited = set()
-        visited.add(k)
-        for child in adj[k]:
-            heapq.heappush(heap,child)
-
-        res = 0
         while len(visited) != n and heap:
-            t, v = heapq.heappop(heap)
+            t, u = heapq.heappop(heap)
             res = t
-            if v in visited: continue
-            visited.add(v)
-            for child in adj[v]:
-                ct, cv = child
-                if cv in visited: continue
-                heapq.heappush(heap,[ct+t, cv])
-    
+            if u in visited: continue
+            visited.add(u)
+            for nt, v in adj[u]:
+                if v in visited: continue
+                heapq.heappush(heap,(nt+t, v))
+
         return res if len(visited) == n else -1
