@@ -3,7 +3,16 @@ class Solution:
         l, r = 0, len(height) - 1
         width = len(height) - 1
         res = 0
-        mh = max(height)
+        sh = mh = 0
+        for h in height:
+            if h > mh:
+                sh = mh
+                mh = h
+            elif h < sh:
+                continue
+            else:
+                sh = h
+
         while l < r:
             if height[l] < height[r]:
                 res = max(res, width * height[l])
@@ -11,7 +20,7 @@ class Solution:
             else:
                 res = max(res, width * height[r])
                 r -= 1
-            if mh * width <= res:
+            if sh * width <= res:
                 break
             width -= 1
 
