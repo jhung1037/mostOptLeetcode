@@ -1,5 +1,7 @@
 class Solution:
     def combinationSum4(self, nums: List[int], target: int) -> int:
+        # time complexity = O(n*target)
+        # space complexity = O(target)
         cache = {}
         nums.sort()
 
