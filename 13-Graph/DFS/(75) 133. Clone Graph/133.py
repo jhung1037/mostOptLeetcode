@@ -9,6 +9,8 @@ class Node:
 from typing import Optional
 class Solution:
     def cloneGraph(self, node: Optional['Node']) -> Optional['Node']:
+        # time complexity: O(n) = O(E+V)
+        # space complexity: O(n)
         if not node: return None
 
         visited = {}
