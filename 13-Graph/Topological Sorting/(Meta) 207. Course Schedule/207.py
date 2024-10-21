@@ -1,6 +1,7 @@
 class Solution:
     def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
-
+        # time complexity: O(E + V)
+        # space complexity: O(E + V)
         adj = {i : set() for i in range(numCourses)}
         indegree = [0] * numCourses
         for prerequisite in prerequisites:
