@@ -5,15 +5,12 @@ class Solution:
         dic = {}
         maxi = 0
         for num in nums:
-            if num in dic:
-                continue
-            upper = num + 1
-            while upper in dic:
-                upper = dic[upper][1]
-            lower = num - 1
-            while lower in dic:
-                lower = dic[lower][0]
+            if num in dic: continue
+            upper = dic[num + 1][1] if num + 1 in dic else num
+            lower = dic[num - 1][0] if num - 1 in dic else num
             dic[num] = [lower, upper]
-            maxi = max(upper - lower - 1, maxi)
+            dic[upper][0] = lower
+            dic[lower][1] = upper
+            maxi = max(upper - lower + 1, maxi)
 
         return maxi
