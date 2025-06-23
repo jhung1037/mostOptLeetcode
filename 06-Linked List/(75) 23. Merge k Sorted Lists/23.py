@@ -6,7 +6,7 @@
 class Solution:
     def mergeKLists(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]:
         # time complexity = O(nlogk)
-        # space complexity = O(1)
+        # space complexity = O(logk)
         if not lists: return None
         
         def merge2lists(l1, l2):
