@@ -8,15 +8,14 @@
 class Solution:
     def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
         # time complexity = O(logn) ~ log(n) = O(h)
-        # space complexity = O(logn) ~ log(n) = O(h)
-        if p.val > q.val: p, q = q, p
+        # space complexity = O(1)
+        if p.val > q.val:
+            p, q = q, p
 
-        def dfs(root):
+        while True:
             if p.val <= root.val <= q.val:
                 return root
-            elif root.val > q.val:
-                return dfs(root.left)
+            elif root.val < p.val:
+                root = root.right
             else:
-                return dfs(root.right)
-
-        return dfs(root)
+                root = root.left
