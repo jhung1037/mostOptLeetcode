@@ -1,5 +1,7 @@
 class Solution:
     def exist(self, board: List[List[str]], word: str) -> bool:
+        # time complexity = O(n^2 * 3^L)
+        # space complexity = O(L)
         if len(word) > len(board) * len(board[0]):
             return False
 
